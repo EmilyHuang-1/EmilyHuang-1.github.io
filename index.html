@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="index.css">
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="stackedAreaChart.js"></script>
+<script src="parallelCoords.js"></script>
+</head>
+<body>
+<h1>CS 416 Data Visualization - Narrative Visualization</h1>
+
+
+<div class="tab">
+	<button class="tablinks" onclick="openVisualization(event, 'Overview')">Dashboard</button>
+	<button class="tablinks" onclick="openVisualization(event, 'AreaChart')">Property Price Analysis</button>
+	<button class="tablinks" onclick="openVisualization(event, 'ParallelCoords')">Multidimensional Analysis</button>
+</div>
+
+<div id="Overview" class="tabcontent">
+	<p>
+		The dashboard provides an overview of two graphs. The area chart gives an overview of how the prices are changing during the 2012-2018 period for each of the eight chosen cities, while the parallel coordinates graph provides an analysis of the correlations between different data properties that are part of the dataset.
+	</p>
+</div>
+
+<div id="AreaChart" class="tabcontent">
+  <div id="tooltip"></div>
+	<p> The Property Price Analysis area chart displays an overview of how the prices are changing during the 2012-2018 period for each of the eight chosen cities. It is quite evident that the prices are almost constantly high in cities like San Francisco, which distinguishes it as an outlier. On the other hand, one of the lowest property prices during these years is in Chicago. There is a noticeable increase, but overall, the cost of real estate is lower in comparison to the other seven examples.
+	</p>
+</div>
+
+<div id="ParallelCoords" class="tabcontent">
+	<p>The following visualization analyses the correlations between different data properties that are part of the dataset. Some of these properties show a strong dependency on each other. For instance, real estate properties in San Francisco usually have higher prices (>$1M), and the amount of time the property stays on the market is less compared to other cities. An interesting trend is that properties in cities with lower inventory and fewer new listings are sold quicker and usually above the listed price.
+	</p>
+</div>
+
+<script>
+function openVisualization(evt, visName) {
+    var i, tabcontent, tablinks;
+	d3.select("svg").remove();
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].className = tablinks[i].className.replace(" active", "");
+			tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(visName).style.display = "block";
+	if(evt!==0)
+		evt.currentTarget.className += " active";
+		
+	if(visName ==='Overview') {
+		areaChart.display();
+		multiDimensional.display();
+	}
+	if(visName === 'AreaChart') {
+		d3.select("svg").remove();
+		d3.select("svg").remove();
+		areaChart.display();
+	}
+	if(visName === 'ParallelCoords') {
+		d3.select("svg").remove();
+		d3.select("svg").remove();
+		multiDimensional.display();
+	}
+}
+openVisualization(0,'Overview');
+</script>
+     
+</body>
+</html> 
